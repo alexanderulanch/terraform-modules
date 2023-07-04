@@ -5,11 +5,16 @@ variable "server_port" {
   default = 8080
 }
 
-variable "ec2_ami" {
+variable "ami" {
   type        = string
-  description = "The default ami I will use for playing with terraform"
+  description = "The AMI to run in the cluster"
+  default     = "ami-053b0d53c279acc90"
+}
 
-  default = "ami-053b0d53c279acc90"
+variable "server_text" {
+  description = "The text the web server should return"
+  type        = string
+  default     = "Hello, World!"
 }
 
 variable "cluster_name" {
@@ -40,4 +45,17 @@ variable "min_size" {
 variable "max_size" {
   description = "The maximum number of EC2 instances in the ASG"
   type        = number
+}
+
+variable "custom_tags" {
+  description = "Custom tags for the ASG instances"
+  type        = map(string)
+  default     = {}
+}
+
+variable "enable_autoscaling" {
+  description = "If set to true, auto scaling is enabled"
+  type        = bool
+
+  default = false
 }
